@@ -1,13 +1,17 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <script src="https://kit.fontawesome.com/c88c93bd9b.js" crossorigin="anonymous"> </script>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./view/Css/style.css">
-    <title>Document</title>
-</head>
+<?php
+session_start();
+
+if($_SESSION['nom'] == null)
+{
+	header('Location: login.php');
+}
+
+require_once dirname(__DIR__, 2).DIRECTORY_SEPARATOR.'controller'.DIRECTORY_SEPARATOR.'loginController.php';
+include('header.php');
+
+new header('Accueil', '../Css/style.css');
+?>
+
 <body>
     <header>
         <div class="banniere_image">
@@ -15,7 +19,19 @@
         <nav>
             <ul>
                 <li><a href="">Home</a></li>
-                <li><a href="./view/html/login.php">Se connecter</a></li>
+
+                <?php
+                if(isset($_SESSION['nom']))
+                {
+                    echo '<li><a href="./deconnexion.php">Se déconnecter</a></li>';
+                }
+                else
+                {
+                    echo '<li><a href="./login.php">Se connecter</a></li>';
+                }
+                    
+                ?>
+                
                 <li><a href="../projet/destination.php">Destination</a></li>
                 <li><a href="">Reservation Vol</a></li>
                 <li><a href="">Infos</a></li>

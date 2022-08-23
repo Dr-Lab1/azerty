@@ -14,6 +14,8 @@ class connection
 
     public function login($email, $password)
     {
+        $email    = htmlspecialchars($email);
+        $password = htmlspecialchars($password);
         $logins = $this -> database -> login($email, $password);
 
         if($logins)
@@ -22,7 +24,9 @@ class connection
             {
                 $_SESSION['nom'] = $login['prenom'] . ' ' . $login['nom'];
             }
-            echo 'Joooooooooooooooooooooooo';
+
+            header('Location: index.php');
+
         }
 
         
@@ -30,6 +34,24 @@ class connection
         else
         {
             return false;
+        }
+    }
+
+    public function create($prenom, $nom, $email, $password)
+    {
+        $prenom   = htmlspecialchars($prenom);
+        $nom      = htmlspecialchars($nom);
+        $email    = htmlspecialchars($email);
+        $password = htmlspecialchars($password);
+        $create = $this -> database -> create($prenom, $nom, $email, $password);
+
+        if($create)
+        {
+            echo $create;
+        }
+        else
+        {
+            self::login($email, $password);
         }
     }
 }

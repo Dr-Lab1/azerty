@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 require_once dirname(__DIR__, 2).DIRECTORY_SEPARATOR.'controller'.DIRECTORY_SEPARATOR.'loginController.php';
 include('header.php');
 
@@ -18,14 +19,9 @@ $connection = new connection();
 	   $emailDeConnexion 		= isset($_POST['emailDeConnexion'])  	 	 ? $_POST['emailDeConnexion']    : null;
 	   $passwordDeConnexion 	= isset($_POST['passwordDeConnexion'])  	 ? $_POST['passwordDeConnexion'] : null;
 
-if(isset($_SESSION['nom']))
-{
-	// header('Location: index.php');
-}
-
 if($prenom != null AND $nom != null AND $email != null AND $password != null)
 {
-	
+	$connection -> create($prenom, $nom, $email, $password);
 }
 
 if($emailDeConnexion != null AND $passwordDeConnexion)

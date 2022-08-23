@@ -12,7 +12,7 @@ class Database
     {
         try
         {
-            $login = $this -> database -> prepare('SELECT * FROM utilisateurs WHERE email = :email AND password = :password');
+            $login = $this -> database -> prepare('SELECT * FROM utilisateurs WHERE email = :email AND password = sha1(:password)');
 
             $login -> execute(array(
     
@@ -34,24 +34,20 @@ class Database
     {
         try
         {
-            $login = $this -> database -> prepare('SELECT * FROM utilisateurs WHERE email = :email AND password = :password');
+            $create = $this -> database -> prepare('INSERT INTO utilisateurs (email, password, nom, prenom) VALUES (:email, sha1(:password), :nom, :prenom)');
 
-            $login -> execute(array(
-    
-                'prenom' => $prenom,
-                'nom' => $nom,
+            $create -> execute(array(
+                
                 'email' => $email,
-                'password' => $password
+                'password' => $password,
+                'nom' => $nom,
+                'prenom' => $prenom,
     
             ));
         }catch(PDOException $e){
             die($e -> getMessage());
         }
-        
 
-        $logins = $login -> fetchAll(PDO::FETCH_ASSOC);
-
-        return $logins;
     }
 }
 
