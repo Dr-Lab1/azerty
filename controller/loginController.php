@@ -29,11 +29,9 @@ class connection
 
         }
 
-        
-
         else
         {
-            return false;
+            $_SESSION['wrongPassword'] = 1;
         }
     }
 
@@ -43,16 +41,24 @@ class connection
         $nom      = htmlspecialchars($nom);
         $email    = htmlspecialchars($email);
         $password = htmlspecialchars($password);
-        $create = $this -> database -> create($prenom, $nom, $email, $password);
-
-        if($create)
+        if($this -> database -> emailVerification($email))
         {
-            echo $create;
+            $_SESSION['wrongEmail'] = 1;
         }
         else
         {
-            self::login($email, $password);
+            $create = $this -> database -> create($prenom, $nom, $email, $password);
+
+            if($create)
+            {
+                echo $create;
+            }
+            else
+            {
+                self::login($email, $password);
+            }
         }
+        
     }
 }
 ?>

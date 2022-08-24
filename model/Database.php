@@ -49,6 +49,29 @@ class Database
         }
 
     }
+
+    public function emailVerification($email)
+    {
+        try
+        {
+            $verification = $this -> database -> prepare('SELECT * FROM utilisateurs WHERE email = :email');
+
+            $verification -> execute(array(
+    
+                'email' => $email
+    
+            ));
+        }catch(PDOException $e){
+            return false;
+            die;
+            die($e -> getMessage());
+        }
+        
+
+        // $verifications = $verification -> fetchAll(PDO::FETCH_ASSOC);
+
+        return true;
+    }
 }
 
 ?>

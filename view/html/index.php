@@ -9,7 +9,7 @@ if($_SESSION['nom'] == null)
 require_once dirname(__DIR__, 2).DIRECTORY_SEPARATOR.'controller'.DIRECTORY_SEPARATOR.'loginController.php';
 include('header.php');
 
-new header('Accueil', '../Css/style.css');
+new header('Loginjhdgsdh', '../Css/style.css');
 ?>
 
 <body>

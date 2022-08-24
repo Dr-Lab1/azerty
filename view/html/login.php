@@ -19,6 +19,10 @@ $connection = new connection();
 	   $emailDeConnexion 		= isset($_POST['emailDeConnexion'])  	 	 ? $_POST['emailDeConnexion']    : null;
 	   $passwordDeConnexion 	= isset($_POST['passwordDeConnexion'])  	 ? $_POST['passwordDeConnexion'] : null;
 
+	   /* Info sur la connexion */
+	   $_SESSION['wrongPassword'] = 0;
+	   $_SESSION['wrongEmail'] = 0;
+
 if($prenom != null AND $nom != null AND $email != null AND $password != null)
 {
 	$connection -> create($prenom, $nom, $email, $password);
@@ -37,12 +41,23 @@ if($emailDeConnexion != null AND $passwordDeConnexion)
 	<div class="form-container sign-up-container">
 		
 		<form action="" method="post">
-			<h1>Creer un compte </h1>
+			<h1>Créer un compte </h1>
 			
 			<input type="text" placeholder="Prenom" name="prenom" required/>
 			<input type="text" placeholder="Nom" name="nom" required/>
 			<input type="email" placeholder="Email" name="email" required/>
+			<?php
+
+				if($_SESSION['wrongEmail'] == 1)
+				{
+					echo '<span class="info">L\'email est déjà utilisé</span>';
+				}
+
+			?>
+			
+
 			<input type="password" placeholder="Password" name="password" required/>
+
 			<button>S'inscrire</button>
 		</form>
 		</div>
@@ -53,6 +68,15 @@ if($emailDeConnexion != null AND $passwordDeConnexion)
 			
 			<span>Entrez vos Informations</span>
 			<input type="email" placeholder="Email" name="emailDeConnexion" required/>
+			<?php
+
+				if($_SESSION['wrongPassword'] == 1)
+				{
+					echo '<span class="info">L\'email ou le mot de passe est incorrect</span>';
+				}
+
+			?>
+
 			<input type="password" placeholder="Password" name="passwordDeConnexion" required/>
 			<button >Connexion</button>
 		</form>
