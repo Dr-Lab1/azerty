@@ -27,13 +27,26 @@ class index
             {
                 $rand[] = $verf;
 
-                echo '<a href="./destinationPerso.php?idAuth='. $random[$verf]['idUser'] .'">
-                        <div class="autochtone_card">
-                            <div class="card_content_autochtone">
-                                <h3>'. $random[$verf]['prenom'] .'<br>'. $random[$verf]['nom'] .'</h3>
+                echo '<a href="./destinationPerso.php?idAuth='.$random[$verf]['idUser'].'">  
+                        <div class="carte">
+                             <img src="" alt="">
+                            <div class="descriptionCarte">
+                            <h3>'. $random[$verf]['prenom'] .'<br>'. $random[$verf]['nom'] .'</h3>
+                            </div>
+                            <div class="Descrip">
+                                <p>Jinchuriki du démon à 9 queues.Et protagoniste de la série.</p>
                             </div>
                         </div>
-                    </a>';
+                        </a>';
+                        
+
+                // echo '<a href="./destinationPerso.php?idAuth='. $random[$verf]['idUser'] .'">
+                //         <div class="autochtone_card">
+                //             <div class="card_content_autochtone">
+                //                 <h3>'. $random[$verf]['prenom'] .'<br>'. $random[$verf]['nom'] .'</h3>
+                //             </div>
+                //         </div>
+                //     </a>';
             }
             
         }

@@ -5,6 +5,7 @@ if($_SESSION['nom'] == null)
 	header('Location: index.php');
 }
 
+include('footer.php');
 require_once dirname(__DIR__, 2).DIRECTORY_SEPARATOR.'controller'.DIRECTORY_SEPARATOR.'loginController.php';
 
 // modifier aussi le header automatiquement 
@@ -237,7 +238,7 @@ $header -> nav();
 </div>
 
 <?php 
-include('./footer.php');
+
 new footer();
 ?>
 

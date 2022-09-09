@@ -107,6 +107,9 @@ $index = new index();
                         Vous aussi, vous êtes libres de partager les merveilleux endroits
                         dont vous avez connaissance... Tout le monde peut devenir "Autochtone" il vous suffit de nous rejoindre. <br>
                     </p>
+                    <!-- ici tu vérifie seulement si le compte est deja créer si oui, on mance l'interface creation new site...
+                        si non on fait un ptit tour par la page de connexion puis on arrive à la page de creation de site...
+                        et puis aussi -->
                     <a href="./login.php" class="btn btn-destination">
                         NOUS REJOINDRE
                     </a>
