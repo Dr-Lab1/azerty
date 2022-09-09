@@ -1,0 +1,52 @@
+*** header.php ***
+
+Essaye d'inspecter la partie :
+
+- J'y ai mis la fx session_start()
+    => elle sert à lancer l'utilisation des session dans une page
+
+- Il y a la class header
+    => Cette class a la fx __constructeur(), déjà on a parlé de son rôle l'autre fois, mais son rôle est plus simple que
+       celui d'avant. Maintenant, il ne met que le titre et le lien du style 
+    => j'ai aussi rajouté à cette class, la fx nav(), il sert à faire apparaitre la nav barre
+
+    Si tu veux seulement du style et du titre sans nav barre, tu n'auras qu'à faire : new header('titre', 'style');
+        C'est à cause de ce qui se passait d'ailleurs avec login.php. Ca affichait la nav barre aussi
+        Donc j'ai simplement fait new header('titre', 'style');
+    
+    Sinon si tu veux le style, le titre et la nav barre, tu devras faire :
+        $_nom_variable = new header('titre', 'style');
+        $_nom_variable -> nav();
+        C'est l'exemple de toutes les autres interfaces
+
+
+
+*** footer.php ***
+
+Jusque là j'ai pas encore compris ce que tu pensais, du coup tu vas m'expliquer avant que je ne dynamise cette interface
+
+
+
+*** index.php ***
+
+- On a inclu des fichiers à extension php, tels que le fichier du controller (indexController.php), le footer, le header,...
+
+- J'ai effacé tes codes html statiques pour les remplacer par des fx php dynamiques qui sont toutes implementées dans le
+    le controller, et les toutes sont en mode random (aléatoire)
+
+- Toutes les photos sont aléatoires, même les noms des autochtones les sont. vu que le nombre d'affichage dans index est limité
+    j'ai écris un algorithme qui change les données à chaque chargement de la page. Tu peux essayer 
+
+- Lorsqu'on est connecté, on peut créer un site mais lorsqu'on ne le pas, on peut rejoindre
+    Try it aussi.
+
+- Sinon les autres textes de motiv, je les garde, c'est important
+
+
+*** destinationPerso ***
+
+- J'ai rien capté de l'interface, tu vas m'expliquer en face
+
+
+*** destination ***
+

@@ -30,15 +30,16 @@ class Database
         return $logins;
     }
 
-    public function create($prenom, $nom, $email, $password)
+    public function create($prenom,$idUser , $nom, $email, $password)
     {
         try
         {
-            $create = $this -> database -> prepare('INSERT INTO utilisateurs (email, password, nom, prenom) VALUES (:email, sha1(:password), :nom, :prenom)');
+            $create = $this -> database -> prepare('INSERT INTO utilisateurs (email, idUser, password, nom, prenom, statut) VALUES (:email, :idUser, sha1(:password), :nom, :prenom, 0)');
 
             $create -> execute(array(
                 
                 'email' => $email,
+                'idUser' => $idUser,
                 'password' => $password,
                 'nom' => $nom,
                 'prenom' => $prenom,
@@ -66,11 +67,80 @@ class Database
             die;
             die($e -> getMessage());
         }
-        
+        $verifications = $verification -> fetchAll();
+        return $verifications;
+    }
 
-        // $verifications = $verification -> fetchAll(PDO::FETCH_ASSOC);
+    public function statute($email)
+    {
+        try
+        {
+            $statute = $this -> database -> prepare('UPDATE utilisateurs SET statut = 1 WHERE email = :email');
+            
+            $statute -> execute(array(
+                'email' => $email
+            ));
+        }catch(PDOException $e){
+            die($e -> getMessage());
+        }
+    }
 
-        return true;
+    public function getAllAutochtone()
+    {
+        try
+        {
+            $all = $this -> database -> prepare('SELECT * FROM utilisateurs WHERE statut = 1');
+
+            $all -> execute();
+        }catch(PDOException $e){
+            die($e -> getMessage());
+        }
+
+        $yes = $all -> fetchAll(PDO::FETCH_ASSOC);
+        return $yes;
+    }
+
+    public function getRandomContinent()
+    {
+        try
+        {
+            $all = $this -> database -> prepare('SELECT * FROM continents');
+
+            $all -> execute();
+
+        }catch(PDOException $e){
+            die($e -> getMessage());
+        }
+
+        $yes = $all -> fetchAll(PDO::FETCH_ASSOC);
+        return $yes;
+    }
+
+    public function getRandomDestination($precision = 'tous')
+    {
+        try
+        {
+            if($precision == 'tous')
+            {
+                $all = $this -> database -> prepare('SELECT m.path, m.idSite, d.idSite, d.nom FROM medias m JOIN destinations d WHERE m.idSite = d.idSite');
+
+                $all -> execute();
+            }
+            else
+            {
+                $all = $this -> database -> prepare('SELECT m.path, m.idSite, d.idSite, d.nom, d.continent FROM medias m JOIN destinations d WHERE m.idSite = d.idSite AND d.continent = :continent');
+
+                $all -> execute(array(
+                    'continent' => $precision
+                ));
+            }
+            
+        }catch(PDOException $e){
+            die($e -> getMessage());
+        }
+
+        $yes = $all -> fetchAll(PDO::FETCH_ASSOC);
+        return $yes;
     }
 }
 

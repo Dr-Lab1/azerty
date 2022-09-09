@@ -40,6 +40,7 @@ class connection
         $prenom   = htmlspecialchars($prenom);
         $nom      = htmlspecialchars($nom);
         $email    = htmlspecialchars($email);
+        $idUser   = substr(sha1($email), 0, 10);  
         $password = htmlspecialchars($password);
         if($this -> database -> emailVerification($email))
         {
@@ -47,7 +48,7 @@ class connection
         }
         else
         {
-            $create = $this -> database -> create($prenom, $nom, $email, $password);
+            $create = $this -> database -> create($prenom, $idUser, $nom, $email, $password);
 
             if($create)
             {

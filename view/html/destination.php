@@ -1,33 +1,68 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../projet/Css/j.css">
-    <title>Destination</title>
-</head>
-<body>
-<header>
-        <div class="banniere_image">
-        <nav>
-            <ul>
-                <li><a href="../projet/index.php">Home</a></li>
-                <li><a href="../projet/">Destination</a></li>
-                <li><a href="">Reservation Vol</a></li>
-                <li><a href="">Infos</a></li>
-                <li><a href="">Login & sign Up</a></li>
-            </ul>
-        </nav>
-        </div>
-</header>    
+<?php
+include('header.php');
 
-<section class="">
-    <h3>Ici insére une session du nom de la ville selectionée</h3>
-    <h3>Nom de l'endroit</h3> 
-    <p>Description fournie par l'Autochtone</p>
-</section>
+require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'controller' . DIRECTORY_SEPARATOR . 'destinationController.php';
+
+$header = new header('Destinations', '../Css/style2.css');
+$header->nav();
+
+$destination = new destination();
+
+//superGlobales
+$idContinent = isset($_GET['idContinent']) ? $_GET['idContinent'] : null;
+?>
+
+<div class=generale>
+    <section class="sousHeader">
+        <h1 class="notreDescription">
+            Nos Destinations
+        </h1>
+        <p class="littleDescription">Découvrez pourquoi la nature scandinave est si grandiose, pourquoi les paysages irlandais sont si envoûtants et pourquoi les lieux historiques du Royaume-Uni sont si fascinants.
+        </p>
+        <!-- <a href="./destination.php" class="btn btn-destination">
+                Voir nos destinations
+            </a> -->
+    </section>
+
+    <section class="boxDestination">
+        <div class="listeDestination">
+            <div class="endroit">
+                <a href="./destination.php">
+                <h2>Tous</h2>
+                </a>
+            </div>
+            <!-- destination enregistré affiché en aléatoire -->
+
+            <?php
+                $destination -> getRandomContinent();
+            ?>
+
+        </div>
+    </section>
+
+    <section class="imageDestination">
+
+        <?php
+        if($idContinent == null)
+        {
+            $destination->getRandomDestination();
+        }
+        else
+        {
+        $destination->getRandomDestination($idContinent);
+        }
+        ?>
+
+
+
+    </section>
+</div>
+<?php
+include('./footer.php');
+new footer();
+?>
 
 
 </body>
+
 </html>
